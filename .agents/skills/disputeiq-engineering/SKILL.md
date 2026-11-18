@@ -34,7 +34,7 @@ changes, tests with every behaviour change, and decisions explained briefly.
 | `diq-notification-service` | SSE push, email, SLA alerts | Persisting business data |
 | `diq-network-simulator` | Fake card-network feed (retries and duplicates on purpose) | Production deployment |
 | `diq-web` | React/TS analyst console | Calling services other than through `diq-gateway` |
-| `diq-platform-libs` | `diq-parent` POM, BOM, starters (tenancy, idempotency, outbox, kafka, ai, observability) | Service-specific code |
+| `diq-platform-libs` | Gradle convention scripts, BOM, starters (tenancy, idempotency, outbox, kafka, ai, observability) | Service-specific code |
 | `diq-event-schemas` | Avro schemas + generated Java/TS artifacts | Breaking changes |
 | `diq-helm-library` | Helm library chart templates | App-specific values |
 | `diq-gitops` | Argo CD ApplicationSets, env release manifests, Kargo, platform add-ons, policies | Application source code |
@@ -133,7 +133,7 @@ Stage specific files (`git add <paths>`). Never use `git add -A` blindly.
 - Config: `@ConfigurationProperties` records with validation. No `@Value` sprawl.
 - Logging: SLF4J with structured key/values. Never log request bodies, evidence text, prompts
   containing case data, or tokens.
-- Formatting is owned by **Spotless (palantir-java-format)**. Run `./mvnw spotless:apply`. Never
+- Formatting is owned by **Spotless (google-java-format AOSP)**. Run `./gradlew spotlessApply`. Never
   hand-format or argue with the formatter.
 
 ## 5. Concurrency: virtual threads
@@ -188,7 +188,7 @@ Stage specific files (`git add <paths>`). Never use `git add -A` blindly.
 - Agent graphs (LangGraph4j): each node is a small, unit-testable class. State is checkpointed.
   Human review is an interrupt, not a flag.
 - **Eval gate:** any change under `prompts/**`, retrieval logic or model config must run
-  `./mvnw -Pevals verify` and report the metric deltas (accuracy, recall@8, groundedness, cost) in
+  `./gradlew check -Pevals=true` and report the metric deltas (accuracy, recall@8, groundedness, cost) in
   the PR description.
 - Store on every recommendation: model ID, prompt version, retrieved chunk IDs, scores, latency
   and tokens.
@@ -237,13 +237,13 @@ tests (use WireMock or a stub `ChatModel`), and fixed clocks (`Clock` injected).
 
 | Repo type | Fast check | Full verify |
 |---|---|---|
-| Java service | `./mvnw -q spotless:apply checkstyle:check` | `./mvnw verify` (unit + ITs + JaCoCo) |
-| AI services | — | `./mvnw -Pevals verify` (when prompts/retrieval/model change) |
-| `diq-web` | `pnpm lint && pnpm typecheck` | `pnpm test --run && pnpm build` |
+| Java service | `./gradlew spotlessApply checkstyleMain checkstyleTest` | `./gradlew check` (Spotless + Checkstyle + tests + JaCoCo) |
+| AI services | — | `./gradlew check -Pevals=true` (when prompts/retrieval/model change) |
+| `diq-web` | `npm run lint && npm run typecheck` | `npm run test && npm run build` |
 | Helm chart | `helm lint chart && helm template chart \| kubeconform -strict` | — |
 | Branch-wide | — | `git rebase -x "<full verify>" origin/main` |
 
-On Windows, use `mvnw.cmd` if `./mvnw` is not available in the current shell.
+On Windows, use `.\gradlew.bat` if `./gradlew` is not available in the current shell.
 
 ## 13. How to work on a task
 
