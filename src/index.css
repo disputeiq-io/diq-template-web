@@ -1,0 +1,20 @@
+:root {
+  color-scheme: light dark;
+  --diq-bg: #fafafa;
+  --diq-surface: #ffffff;
+  --diq-border: #e4e4e7;
+  --diq-text: #18181b;
+  --diq-muted: #52525b;
+  --diq-accent: #1d4ed8;
+}
+
+body {
+  margin: 0;
+  font-family:
+    'Geist Sans',
+    system-ui,
+    -apple-system,
+    sans-serif;
+  background-color: var(--diq-bg);
+  color: var(--diq-text);
+}

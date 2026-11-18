@@ -1,0 +1,39 @@
+# Build artifacts
+target/
+build/
+out/
+dist/
+coverage/
+*.jar
+*.war
+*.ear
+*.class
+
+# Node / JS
+node_modules/
+npm-debug.log*
+.vite/
+storybook-static/
+
+# IDEs & OS
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Environment & secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.jks
+
+# Logs & temp
+*.log
+logs/
+tmp/

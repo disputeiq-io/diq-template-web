@@ -1,0 +1,4 @@
+* @disputeiq-platform/platform-owners
+/.github/ @disputeiq-platform/platform-owners
+/.agents/ @disputeiq-platform/platform-owners
+/chart/ @disputeiq-platform/platform-owners
