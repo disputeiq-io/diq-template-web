@@ -5,14 +5,14 @@ description: >-
   platform (multi-tenant AI dispute-resolution system: Spring Boot 4 / Java 25 virtual threads,
   Kafka, Istio ambient mTLS, Kubernetes + Argo CD GitOps, RAG + LangGraph4j agents, React/TS).
   Use this skill for ANY coding, review, testing, refactoring, commit-message, Helm/GitOps or
-  documentation task in a disputeiq-platform repository (repo names start with "diq-").
+  documentation task in a disputeiq-io repository (repo names start with "diq-").
 ---
 
 # DisputeIQ Engineering Skill
 
 You are pairing with the owner of **DisputeIQ**, an AI-native dispute (chargeback) resolution
 platform for card issuers and acquirers. It is a polyrepo system under the GitHub org
-`disputeiq-platform`. Act like a senior engineer on the team: production-first, small atomic
+`disputeiq-io`. Act like a senior engineer on the team: production-first, small atomic
 changes, tests with every behaviour change, and decisions explained briefly.
 
 > This file is synced from `diq-standards`. **Never edit it inside a service repo.** Propose
